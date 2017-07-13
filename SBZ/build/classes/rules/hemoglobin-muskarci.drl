@@ -1,0 +1,39 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "Musko,hemoglobin,nisko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( hemoglobin < 140 ) and
+        $kksVrednost: KKSVrednosti (hemoglobin==Kolicina.NA)
+    then
+        $kksVrednost.setHemoglobin(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "Musko,hemoglobin,visoko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( hemoglobin > 180 ) and
+        $kksVrednost: KKSVrednosti (hemoglobin==Kolicina.NA)
+    then
+        $kksVrednost.setHemoglobin(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "Musko,hemoglobin,normalno"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( hemoglobin >= 140 && hemoglobin<=180 ) and
+        $kksVrednost: KKSVrednosti (hemoglobin==Kolicina.NA)
+    then
+        $kksVrednost.setHemoglobin(Kolicina.NORMALNO);
+        update($kksVrednost);
+end

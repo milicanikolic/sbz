@@ -1,0 +1,43 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.EnzimiJetre;
+import model.EnzimiJetreVrednosti;
+
+rule "Zensko,gamaGT,nisko"
+agenda-group "jetra"
+    when
+    	$p: Pacijent(zensko==true) and
+        $ej: EnzimiJetre( gamaGT < 9) and
+        $ejVrednost: EnzimiJetreVrednosti (gamaGT==Kolicina.NA)
+    then
+        $ejVrednost.setGamaGT(Kolicina.NISKO);
+        update($ejVrednost);
+end
+
+rule "Zensko,gamaGT,visoko"
+agenda-group "jetra"
+    when
+    	$p: Pacijent(zensko==true) and
+        $ej: EnzimiJetre( gamaGT >35 ) and
+        $ejVrednost: EnzimiJetreVrednosti (gamaGT==Kolicina.NA)
+    then
+        $ejVrednost.setGamaGT(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Zensko,gamaGT,normalno"
+agenda-group "jetra"
+    when
+    	$p: Pacijent(zensko==true) and
+        $ej: EnzimiJetre( gamaGT >= 9 && gamaGT<=35 ) and
+        $ejVrednost: EnzimiJetreVrednosti (gamaGT==Kolicina.NA)
+    then
+        $ejVrednost.setGamaGT(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+

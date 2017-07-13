@@ -1,0 +1,43 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.EnzimiUKrvi;
+import model.EnzimiUKrviVrednosti;
+
+rule "Musko,lipaza,nisko"
+agenda-group "enzimiKrvi"
+    when
+    $p: Pacijent(zensko==false) and
+        $ek: EnzimiUKrvi( lipaza < 1.05) and
+        $ekVrednost: EnzimiUKrviVrednosti (lipaza==Kolicina.NA)
+    then
+        $ekVrednost.setLipaza(Kolicina.NISKO);
+        update($ekVrednost);
+end
+
+rule "Musko,lipaza,visoko"
+agenda-group "enzimiKrvi"
+    when
+    $p: Pacijent(zensko==false) and
+        $ek: EnzimiUKrvi( lipaza >1.75 ) and
+        $ekVrednost: EnzimiUKrviVrednosti (lipaza==Kolicina.NA)
+    then
+        $ekVrednost.setLipaza(Kolicina.VISOKO);
+        update($ekVrednost);
+end
+
+rule "Musko,lipaza,normalno"
+agenda-group "enzimiKrvi"
+    when
+    $p: Pacijent(zensko==false) and
+        $ek: EnzimiUKrvi( lipaza >= 1.05 && lipaza<=1.75 ) and
+        $ekVrednost:EnzimiUKrviVrednosti (lipaza==Kolicina.NA)
+    then
+        $ekVrednost.setLipaza(Kolicina.NORMALNO);
+        update($ekVrednost);
+end
+
+

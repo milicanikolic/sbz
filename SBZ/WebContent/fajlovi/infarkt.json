@@ -1,0 +1,9 @@
+{
+	"infarkt":{
+			"amilaza":25,
+			"lipaza":1.5,
+			"ckMb":6,
+			"troponin":0.5,
+			"mioglobin":120
+			}
+}

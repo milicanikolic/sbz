@@ -1,0 +1,43 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import enums.Bolesti;
+import enums.DodatneAnalize;
+import model.EnzimiJetreVrednosti;
+
+rule "jetra"
+agenda-group "jetra"
+no-loop
+    when
+    $p:Pacijent(jetra==false)
+	$ejVrednost: EnzimiJetreVrednosti (alt==Kolicina.VISOKO && ast==Kolicina.VISOKO)
+   
+    
+    then
+
+        $p.dodajBolest(Bolesti.JETRA);
+        $p.setJetra(true);
+        update($p);
+        
+        
+end
+
+rule "jetra-zuc"
+agenda-group "jetra"
+no-loop
+    when
+    $p:Pacijent(zuc==false)
+	$ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.VISOKO && gamaGT==Kolicina.VISOKO)
+   
+    
+    then
+
+        $p.dodajBolest(Bolesti.ZUCNI_PUTEVI);
+        $p.setZuc(true);
+        update($p);
+        
+        
+end

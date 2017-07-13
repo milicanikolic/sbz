@@ -1,0 +1,39 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "Musko,hematokrit,nisko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( hematokrit < 41 ) and
+        $kksVrednost: KKSVrednosti (hematokrit==Kolicina.NA)
+    then
+        $kksVrednost.setHematokrit(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "Musko,hematokrit,visoko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( hematokrit > 53 ) and
+        $kksVrednost: KKSVrednosti (hematokrit==Kolicina.NA)
+    then
+        $kksVrednost.setHematokrit(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "Musko,hematokrit,normalno"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( hematokrit >= 41 && hematokrit<=53 ) and
+        $kksVrednost: KKSVrednosti (hematokrit==Kolicina.NA)
+    then
+        $kksVrednost.setHematokrit(Kolicina.NORMALNO);
+        update($kksVrednost);
+end

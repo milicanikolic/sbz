@@ -1,0 +1,41 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.DodatnoAnemija1;
+import model.DodatnoAnemija1Vrednosti;
+
+rule "Musko,gvozdje,nisko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $da: DodatnoAnemija1( gvozdje < 6.5 ) and
+        $daVrednost: DodatnoAnemija1Vrednosti (gvozdje==Kolicina.NA)
+    then
+        $daVrednost.setGvozdje(Kolicina.NISKO);
+        update($daVrednost);
+end
+
+rule "Musko,gvozdje,visoko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $da: DodatnoAnemija1( gvozdje > 29.5 ) and
+        $daVrednost: DodatnoAnemija1Vrednosti (gvozdje==Kolicina.NA)
+    then
+        $daVrednost.setGvozdje(Kolicina.VISOKO);
+        update($daVrednost);
+end
+
+rule "Musko,gvozdje,normalno"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $da: DodatnoAnemija1( gvozdje >= 6.5 && gvozdje<=29.5 ) and
+        $daVrednost: DodatnoAnemija1Vrednosti (gvozdje==Kolicina.NA)
+    then
+        $daVrednost.setGvozdje(Kolicina.NORMALNO);
+        update($daVrednost);
+end

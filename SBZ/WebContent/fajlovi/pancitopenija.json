@@ -1,0 +1,18 @@
+{
+	"pancitopenija":{
+			"eritrociti":4,
+			"hemoglobin":120,
+			"hematokrit":40,
+			"mcv":90,
+			"mchc":320,
+			"trombociti":120,
+			"lym":30,
+			"leukociti":3,
+			"neu":50,
+			"mon":2,
+			"eos":5,
+			"bas":0.2,
+			"urea":2,
+			"kreatinin":70
+			}
+}

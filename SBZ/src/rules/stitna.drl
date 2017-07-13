@@ -1,0 +1,32 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.StitnaZlezdaVrednosti;
+
+rule "stitna-adenohipofiza"
+agenda-group "stitna"
+no-loop
+    when
+     $p:Pacijent(adenohipofiza==false)
+        $ejVrednost: StitnaZlezdaVrednosti (t3==Kolicina.VISOKO && t4==Kolicina.VISOKO && tsh==Kolicina.VISOKO)
+    then
+        $p.dodajBolest(Bolesti.ADENOHIPOFIZA);
+        $p.setAdenohipofiza(true);
+        update($p);
+end
+
+rule "stitna-hipertireoza"
+agenda-group "stitna"
+no-loop
+    when
+        $p:Pacijent(hipertireoza==false)
+        $ejVrednost: StitnaZlezdaVrednosti (t3==Kolicina.VISOKO && t4==Kolicina.VISOKO && tsh==Kolicina.NISKO)
+    then
+        $p.dodajBolest(Bolesti.HIPERTIREOZA);
+        $p.setHipertireoza(true);
+        update($p);
+end
+

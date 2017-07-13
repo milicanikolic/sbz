@@ -1,0 +1,36 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "urea,nisko"
+agenda-group "kks"
+    when
+        $kks: KKS( urea < 1.7 ) and
+        $kksVrednost: KKSVrednosti (urea==Kolicina.NA)
+    then
+        $kksVrednost.setUrea(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "urea,visoko"
+agenda-group "kks"
+    when
+        $kks: KKS( urea > 8.3 ) and
+        $kksVrednost: KKSVrednosti (urea==Kolicina.NA)
+    then
+        $kksVrednost.setUrea(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "urea,normalno"
+agenda-group "kks"
+    when
+        $kks: KKS( urea >= 1.7 && urea<=8.3 ) and
+        $kksVrednost: KKSVrednosti (urea==Kolicina.NA)
+    then
+        $kksVrednost.setUrea(Kolicina.NORMALNO);
+        update($kksVrednost);
+end

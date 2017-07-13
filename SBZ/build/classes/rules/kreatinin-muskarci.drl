@@ -1,0 +1,39 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "Musko,kreatinin,nisko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( kreatinin < 62 ) and
+        $kksVrednost: KKSVrednosti (kreatinin==Kolicina.NA)
+    then
+        $kksVrednost.setKreatinin(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "Musko,kreatinin,visoko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( kreatinin > 106 ) and
+        $kksVrednost: KKSVrednosti (kreatinin==Kolicina.NA)
+    then
+        $kksVrednost.setKreatinin(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "Musko,kreatinin,normalno"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( kreatinin >= 62 && kreatinin<=106 ) and
+        $kksVrednost: KKSVrednosti (kreatinin==Kolicina.NA)
+    then
+        $kksVrednost.setKreatinin(Kolicina.NORMALNO);
+        update($kksVrednost);
+end

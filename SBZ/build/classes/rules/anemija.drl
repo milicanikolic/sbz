@@ -1,0 +1,98 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import enums.Bolesti;
+import enums.DodatneAnalize;
+import model.DodatnoAnemija1;
+import model.DodatnoAnemija1Vrednosti;
+import model.DodatnoAnemija2;
+import model.DodatnoAnemija2Vrednosti;
+
+rule "anemija"
+agenda-group "kks"
+no-loop
+    when
+   $p:Pacijent($b:bolesti) 
+    forall( $x : Bolesti() from $b 
+            Bolesti( this == $x, this != Bolesti.PANCITOPENIJA ) ) and
+    $kksVrednost: KKSVrednosti (eritrociti==Kolicina.NISKO && hemoglobin==Kolicina.NISKO && hematokrit==Kolicina.NISKO)
+   
+    
+    then
+
+        $p.dodajBolest(Bolesti.ANEMIJA);
+        update($p);
+        
+        
+end
+
+
+rule "anemija-dodatne analize1"
+agenda-group "kks"
+no-loop
+	when
+		$p:Pacijent($b:bolesti, $das:dodatneAnalize)
+		$da:DodatneAnalize(this==DodatneAnalize.NA) from $das
+		Bolesti( this==Bolesti.ANEMIJA ) from $b and
+		KKSVrednosti(mcv==Kolicina.NISKO && mchc==Kolicina.NISKO)
+		
+	then 
+		$p.setDodatneAnalize(DodatneAnalize.SIDERO);
+		update($p);
+end
+
+
+rule "anemija-dodatne analize2"
+agenda-group "kks"
+no-loop
+	when
+		$p:Pacijent($b:bolesti, $das:dodatneAnalize)
+		$da:DodatneAnalize(this==DodatneAnalize.NA) from $das
+		Bolesti( this==Bolesti.ANEMIJA ) from $b and
+		KKSVrednosti(mcv==Kolicina.VISOKO && mchc==Kolicina.NISKO)
+		
+	then 
+		$p.setDodatneAnalize(DodatneAnalize.MEGALOBLASTNA);
+		update($p);
+end
+
+rule "sideropenijska-anemija"
+agenda-group "kks"
+no-loop
+	when
+		$p :Pacijent(dodatneAnalize==DodatneAnalize.SIDERO) and
+		$da1: DodatnoAnemija1Vrednosti (uibc==Kolicina.VISOKO && tibc==Kolicina.NISKO && gvozdje==Kolicina.NISKO)  
+		
+    
+    then
+
+        $p.dodajBolest(Bolesti.SIDEROPENIJSKA_ANEMIJA);
+        update($p);
+end
+
+rule "megaloblastna-anemija" 
+agenda-group "kks"
+no-loop	
+	when
+		$p :Pacijent(dodatneAnalize==DodatneAnalize.MEGALOBLASTNA) and
+		$da2: DodatnoAnemija2Vrednosti (b12==Kolicina.NISKO && folnaKiselina==Kolicina.NISKO)
+	then
+		$p.dodajBolest(Bolesti.MEGALOBLASTNA_ANEMIJA);
+        update($p);
+end
+
+rule "sideroblastna-anemija" 
+agenda-group "kks"
+no-loop	
+	when
+		$p :Pacijent(dodatneAnalize==DodatneAnalize.SIDERO) and
+		$da2: DodatnoAnemija1Vrednosti (gvozdje==Kolicina.NORMALNO)
+	then
+		$p.dodajBolest(Bolesti.SIDEROBLASTNA_ANEMIJA);
+        update($p);
+end
+	
+

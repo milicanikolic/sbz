@@ -1,0 +1,113 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import enums.Bolesti;
+import enums.DodatneAnalize;
+import model.DodatnoAnemija1;
+import model.DodatnoAnemija1Vrednosti;
+import model.DodatnoAnemija2;
+import model.DodatnoAnemija2Vrednosti;
+
+rule "bakterijsko-zapaljenje1"
+agenda-group "kks"
+no-loop
+    when
+        $kksVrednost: KKSVrednosti (neu==Kolicina.VISOKO && lym==Kolicina.NISKO)
+     	$p :Pacijent(bakterija==false)
+    
+    then
+
+        $p.dodajBolest(Bolesti.BAKTERIJSKO_ZAPALJENJE);
+        $p.setBakterija(true);
+        update($p);
+        
+        
+end
+
+rule "bakterijsko-zapaljenje2"
+agenda-group "kks"
+no-loop
+    when
+        $kksVrednost: KKSVrednosti (neu==Kolicina.VISOKO && lym==Kolicina.NORMALNO)
+     	$p :Pacijent(bakterija==false)
+    
+    then
+
+        $p.dodajBolest(Bolesti.BAKTERIJSKO_ZAPALJENJE);
+        $p.setBakterija(true);
+        update($p);
+        
+        
+end
+
+rule "virusno-zapaljenje1" 
+agenda-group "kks"
+no-loop
+	when
+		$kksVrednost: KKSVrednosti (neu==Kolicina.NISKO && lym==Kolicina.VISOKO)
+		$p :Pacijent(virus==false)
+		then
+
+        $p.dodajBolest(Bolesti.VIRUSNO_ZAPALJENJE);
+        $p.setVirus(true);
+        update($p);
+end
+
+rule "virusno-zapaljenje2" 
+agenda-group "kks"
+no-loop
+	when
+		$kksVrednost: KKSVrednosti (neu==Kolicina.NORMALNO && lym==Kolicina.VISOKO)
+		$p :Pacijent(virus==false)
+		then
+
+        $p.dodajBolest(Bolesti.VIRUSNO_ZAPALJENJE);
+        $p.setVirus(true);
+        update($p);
+end
+
+rule "infekcije" 
+agenda-group "kks"
+no-loop
+	when
+		$kksVrednost: KKSVrednosti (eos==Kolicina.VISOKO)
+		$p :Pacijent(infekcija==false)
+		then
+
+        $p.dodajBolest(Bolesti.INFEKCIJE);
+        $p.setInfekcija(true);
+        update($p);
+end
+
+
+rule "leukemija"
+agenda-group "kks"
+no-loop
+	when
+		$kksVrednost: KKSVrednosti (leukociti == Kolicina.VREDNOST_LEUKEMIJA)
+		$p: Pacijent(leukemija==false)
+		then
+		$p.dodajBolest(Bolesti.LEUKEMIJA);
+		$p.setLeukemija(true);
+		update($p);
+
+end
+
+
+rule "pancitopenija" 
+salience 100
+agenda-group "kks"
+no-loop
+	when
+		$kksVrednosti: KKSVrednosti (eritrociti==Kolicina.NISKO && trombociti==Kolicina.NISKO && leukociti==Kolicina.NISKO 
+			&& hemoglobin==Kolicina.NISKO && hematokrit==Kolicina.NISKO)
+		$p :Pacijent(pancitopenija==false)
+		then
+
+        $p.dodajBolest(Bolesti.PANCITOPENIJA);
+        $p.setPancitopenija(true);
+        update($p);
+end		 

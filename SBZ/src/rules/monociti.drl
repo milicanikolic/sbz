@@ -1,0 +1,36 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "mon,nisko"
+agenda-group "kks"
+    when
+        $kks: KKS( mon < 1 ) and
+        $kksVrednost: KKSVrednosti (mon==Kolicina.NA)
+    then
+        $kksVrednost.setMon(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "mon,visoko"
+agenda-group "kks"
+    when
+        $kks: KKS( mon > 10 ) and
+        $kksVrednost: KKSVrednosti (mon==Kolicina.NA)
+    then
+        $kksVrednost.setMon(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "mon,normalno"
+agenda-group "kks"
+    when
+        $kks: KKS( mon >= 1 && mon<=10 ) and
+        $kksVrednost: KKSVrednosti (mon==Kolicina.NA)
+    then
+        $kksVrednost.setMon(Kolicina.NORMALNO);
+        update($kksVrednost);
+end

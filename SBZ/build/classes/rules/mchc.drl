@@ -1,0 +1,36 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "mchc,nisko"
+agenda-group "kks"
+    when
+        $kks: KKS( mchc < 310 ) and
+        $kksVrednost: KKSVrednosti (mchc==Kolicina.NA)
+    then
+        $kksVrednost.setMchc(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "mchc,visoko"
+agenda-group "kks"
+    when
+        $kks: KKS( mchc > 350 ) and
+        $kksVrednost: KKSVrednosti (mchc==Kolicina.NA)
+    then
+        $kksVrednost.setMchc(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "mchc,normalno"
+agenda-group "kks"
+    when
+        $kks: KKS( mchc >= 310 && mchc<=350 ) and
+        $kksVrednost: KKSVrednosti (mchc==Kolicina.NA)
+    then
+        $kksVrednost.setMchc(Kolicina.NORMALNO);
+        update($kksVrednost);
+end

@@ -1,0 +1,50 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "Musko,leukociti,nisko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( leukociti < 3.5 ) and
+        $kksVrednost: KKSVrednosti (leukociti==Kolicina.NA)
+    then
+        $kksVrednost.setLeukociti(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "Musko,leukociti,visoko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( leukociti > 10 && leukociti <=200) and
+        $kksVrednost: KKSVrednosti (leukociti==Kolicina.NA)
+    then
+        $kksVrednost.setLeukociti(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "Musko,leukociti,normalno"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( leukociti >= 3.5 && leukociti<=10 ) and
+        $kksVrednost: KKSVrednosti (leukociti==Kolicina.NA)
+    then
+        $kksVrednost.setLeukociti(Kolicina.NORMALNO);
+        update($kksVrednost);
+end
+
+rule "Musko,leukociti,leukemija"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==false) and
+        $kks: KKS( leukociti >200 ) and
+        $kksVrednost: KKSVrednosti (leukociti==Kolicina.NA)
+    then
+        $kksVrednost.setLeukociti(Kolicina.VREDNOST_LEUKEMIJA);
+        update($kksVrednost);
+end

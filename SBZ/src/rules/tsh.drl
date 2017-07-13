@@ -1,0 +1,41 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.StitnaZlezda;
+import model.StitnaZlezdaVrednosti;
+
+rule "tsh,nisko"
+agenda-group "stitna"
+    when
+        $sz: StitnaZlezda( tsh < 0.27) and
+        $szVrednost: StitnaZlezdaVrednosti (tsh==Kolicina.NA)
+    then
+        $szVrednost.setTsh(Kolicina.NISKO);
+        update($szVrednost);
+end
+
+rule "tsh,visoko"
+agenda-group "stitna"
+    when
+        $sz: StitnaZlezda( tsh >4.20 ) and
+        $szVrednost: StitnaZlezdaVrednosti (tsh==Kolicina.NA)
+    then
+        $szVrednost.setTsh(Kolicina.VISOKO);
+        update($szVrednost);
+end
+
+rule "tsh,normalno"
+agenda-group "stitna"
+    when
+        $sz: StitnaZlezda( tsh >= 0.27 && tsh<=4.20 ) and
+        $szVrednost: StitnaZlezdaVrednosti (tsh==Kolicina.NA)
+    then
+        $szVrednost.setTsh(Kolicina.NORMALNO);
+        update($szVrednost);
+end
+
+
+

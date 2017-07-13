@@ -1,0 +1,41 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.DodatnoAnemija1;
+import model.DodatnoAnemija1Vrednosti;
+
+rule "Zensko,tibc,nisko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==true) and
+        $da: DodatnoAnemija1( tibc < 49 ) and
+        $daVrednost: DodatnoAnemija1Vrednosti (tibc==Kolicina.NA)
+    then
+        $daVrednost.setTibc(Kolicina.NISKO);
+        update($daVrednost);
+end
+
+rule "Zensko,tibc,visoko"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==true) and
+        $da: DodatnoAnemija1( tibc > 75 ) and
+        $daVrednost: DodatnoAnemija1Vrednosti (tibc==Kolicina.NA)
+    then
+        $daVrednost.setTibc(Kolicina.VISOKO);
+        update($daVrednost);
+end
+
+rule "Zensko,tibc,normalno"
+agenda-group "kks"
+    when
+    	$p: Pacijent(zensko==true) and
+        $da: DodatnoAnemija1( tibc >= 49 && tibc<=75 ) and
+        $daVrednost: DodatnoAnemija1Vrednosti (tibc==Kolicina.NA)
+    then
+        $daVrednost.setTibc(Kolicina.NORMALNO);
+        update($daVrednost);
+end

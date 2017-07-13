@@ -1,0 +1,81 @@
+.poluProvidanBeo{
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.poluProvidanCrni{
+  background: rgba(0, 0, 0, 0.5);
+}
+.crnoDugme{
+	 color:pink;
+	 background-color:black;
+}
+.crnoDugme:hover{
+	color:white;
+}
+.crno{
+	color:black;
+}
+.naslovBeli{
+	color:black;
+	font-size:40px;
+}
+.siviVeliki{
+	height: 150px;
+	background-color: rgba(105,105,105,0.5);
+}
+.sivoCrno{
+	background-color: rgba(105, 105, 105, 0.5);
+	color:black;
+}
+.polja{
+	 background-color: rgba(0, 0, 0, 0.5);
+	 color:white;
+}
+.polja:hover{
+	cursor: default;
+}
+
+.jedinica{
+	width: 20px;
+}
+.input-group-addon{
+	min-width: 60px !important;
+	text-align:left; 
+}
+
+.btn-sq-lg {
+  width: 150px !important;
+  height: 150px !important;
+  margin-top: 100px;
+  text-align:center;
+  vertical-align: -50px;
+  background-color:#000000;
+  border-radius:10px;
+  color:pink;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.btn-sq-lg:hover{
+	
+	/*background: rgba(204, 255, 204, 0.7);*/
+	background:rgba(255,182,193,0.6);
+    color:black;
+}
+
+html {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: auto;
+}
+
+br{
+	display:block;
+	margin:10px 0;
+	line-height:22px;
+	content:" ";
+	margin-top:10px;
+}

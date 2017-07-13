@@ -1,0 +1,18 @@
+{
+	"bolest1":{
+			"eritrociti":5,
+			"hemoglobin":150,
+			"hematokrit":50,
+			"mcv":90,
+			"mchc":320,
+			"trombociti":200,
+			"lym":60,
+			"leukociti":5,
+			"neu":30,
+			"mon":2,
+			"eos":8,
+			"bas":0.5,
+			"urea":2,
+			"kreatinin":100
+			}
+}

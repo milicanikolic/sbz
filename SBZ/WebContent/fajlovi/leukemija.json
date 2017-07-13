@@ -1,0 +1,18 @@
+{
+	"leukemija":{
+			"eritrociti":5,
+			"hemoglobin":140,
+			"hematokrit":40,
+			"mcv":90,
+			"mchc":320,
+			"trombociti":200,
+			"lym":10,
+			"leukociti":220,
+			"neu":80,
+			"mon":2,
+			"eos":3,
+			"bas":0.5,
+			"urea":5,
+			"kreatinin":70
+			}
+}

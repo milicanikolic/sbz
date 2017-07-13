@@ -1,0 +1,88 @@
+<div class="container" ng-controller="pocetnaC">    
+       
+ <div class="row">
+ 	<div class="col-xs-8 col-xs-offset-2">
+  		<div style=" margin-top: 50px;" class="well poluProvidanBeo">
+   			<h1 align="center"><i><b>Dodatna analiza - utvrdjivanje sideropenijske/sideroblastne anemije</b></i></h1>
+   			<br>
+   				<a style="margin-left:180px; width: 350px"  href="" class="btn btn-success testDugme" data-toggle="modal" data-target="#myModal">T E S T I R A J</a>
+   	
+  			</div>
+		</div>
+	</div>
+        
+        <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog  modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Izaberite test slucaj:</h4>
+        </div>
+        <div class="modal-body">
+         	 <input type="radio" name="test" ng-model="test" value="sideroblastna">Sideroblastna anemija<br>
+         	 <input type="radio" name="test" ng-model="test" value="sideropenijska"> Sideropenijska anemija<br>
+ 
+         	 
+         	 
+        </div>
+        <div class="modal-footer">
+          <a type="button" href="" class="btn btn-danger" data-dismiss="modal" ng-click="popuni();">Nastavi</a>
+        </div>
+      </div>
+    </div>
+  </div>   
+  <div class="row">          
+    <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-5 col-md-offset-3 col-sm-8 col-sm-offset-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Unesite vrednosti:</div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#/pocetna">Povratak na poÄ�etnu</a></div>
+            </div>  
+            <div class="panel-body" >
+                
+                    <form  class="form-horizontal"  >
+                          
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">Gvozdje </label>
+                            <div class="controls col-md-5 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control"  name="gvozdje"  type="number" ng-model="anemija1.gvozdje"/>
+                            		<span class="input-group-addon ">Î¼mol/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">TIBC </label>
+                            <div class="controls col-md-5 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control"  name="tibc"  type="number" ng-model="anemija1.tibc"/>
+                           		<span class="input-group-addon ">Î¼mol/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">UIBC </label>
+                            <div class="controls col-md-5 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control"  name="uibc"  type="number" ng-model="anemija1.uibc" />
+                            		<span class="input-group-addon ">Î¼mol/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                        <div class="form-group"> 
+                            <div class="aab controls col-md-4 "></div>
+                            <div class="controls col-md-8">
+                               <input type="button" name="zavrsi" value="ZavrÅ¡i" class="btn btn btn-primary pull-right" id="button-id-signup" ng-click="dodatneAnemija1()"/>
+                            </div>
+                        </div> 
+                    
+                    </form>
+        </div>
+    </div> 
+</div>
+</div>
+</div>

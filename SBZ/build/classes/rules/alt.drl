@@ -1,0 +1,40 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.EnzimiJetre;
+import model.EnzimiJetreVrednosti;
+
+rule "Alt,nisko"
+agenda-group "jetra"
+    when
+        $ej: EnzimiJetre( alt < 10) and
+        $ejVrednost: EnzimiJetreVrednosti (alt==Kolicina.NA)
+    then
+        $ejVrednost.setAlt(Kolicina.NISKO);
+        update($ejVrednost);
+end
+
+rule "Alt,visoko"
+agenda-group "jetra"
+    when
+        $ej: EnzimiJetre( alt >48 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alt==Kolicina.NA)
+    then
+        $ejVrednost.setAlt(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alt,normalno"
+agenda-group "jetra"
+    when
+        $ej: EnzimiJetre( alt >= 10 && alt<=48 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alt==Kolicina.NA)
+    then
+        $ejVrednost.setAlt(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+

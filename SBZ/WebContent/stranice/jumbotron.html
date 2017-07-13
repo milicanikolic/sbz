@@ -1,0 +1,54 @@
+<div ng-controller='pocetnaC'>
+<div class="container">
+	<div class="jumbotron poluProvidanBeo">
+    <h1 class="h1-responsive">Dobrodosli!</h1>
+    <p class="lead">Pred Vama je sistem za utvrdjivanje oboljenja na osnovu parametara analize krvi.</p>
+    <hr class="my-2">
+    <p>Za unos vrednosti pritisnite  <a class="btn crnoDugme btn-lg" role="button" data-toggle="modal" data-target="#myModal">OVDE</a></p>
+</div>
+</div>
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><strong>Unesite podatke:</strong></h4>
+        </div>
+        <div class="modal-body">
+         	 <table>
+         	 	<tr>
+         	 		<td><strong>Ime:</strong></td>
+         	 		<td><input type="text" class="form-control polja" name="ime" ng-model="pacijent.ime"></td>
+         	 	</tr>
+         	 	<tr><td>&nbsp;<td></tr>
+         	 	<tr>
+         	 		<td><strong>Prezime:</strong></td>
+         	 		<td><input type="text" class="form-control polja" name="prezime" ng-model="pacijent.prezime"></td>
+         	 	</tr>
+         	 	<tr><td>&nbsp;<td></tr>
+         	 	
+            <tr>
+             <td><strong>Godine:</strong></td>
+             <td><input type="number" class="form-control polja" name="godine" ng-model="pacijent.godine"></td>
+            </tr>
+            <tr><td>&nbsp;<td></tr>
+         	 	<tr>
+         	 		<td><strong>Pol:</strong></td>
+         	 		<td>
+         	 		<input type="radio" name="pol" value="true" ng-model="pacijent.zensko">Zenski &nbsp; 
+         	 		<input type="radio" name="pol" value="false" ng-model="pacijent.zensko">Muski
+         	 		</td>
+         	 		
+         	 	</tr>
+         	 </table>
+        </div>
+        <div class="modal-footer">
+          <a type="button" href="" class="btn crnoDugme" data-dismiss="modal" ng-click="pacijentDalje()">Nastavi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

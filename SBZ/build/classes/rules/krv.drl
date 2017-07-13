@@ -1,0 +1,45 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import enums.Bolesti;
+import enums.DodatneAnalize;
+import model.EnzimiUKrviVrednosti;
+
+rule "pankreas"
+agenda-group "enzimiKrvi"
+no-loop
+    when
+    $p:Pacijent(pankreatitis==false)
+	$eukVrednost: EnzimiUKrviVrednosti (amilaza==Kolicina.VISOKO && lipaza==Kolicina.VISOKO)
+   
+    
+    then
+
+        $p.dodajBolest(Bolesti.PANKREATITIS);
+        $p.setPankreatitis(true);
+        update($p);
+        
+        
+end
+
+
+rule "miokard"
+agenda-group "enzimiKrvi"
+no-loop
+    when
+    $p:Pacijent(infarkt==false)
+	$eukVrednost: EnzimiUKrviVrednosti (ckMb==Kolicina.VISOKO && troponin==Kolicina.VISOKO && mioglobin==Kolicina.VISOKO)
+   
+    
+    then
+
+        $p.dodajBolest(Bolesti.INFARKT_MIOKARDA);
+        $p.setInfarkt(true);
+        update($p);
+        
+        
+end
+

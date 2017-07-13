@@ -1,0 +1,212 @@
+<div ng-controller="pocetnaC">
+	
+	<div class="container">    
+	
+	 <div class="row">
+ 		<div class="col-xs-8 col-xs-offset-2">
+  			<div style=" margin-top: 50px;" class="well siviVeliki">
+   				<h1 class=naslovBeli align="center"><i><b>Analiza: Kompletna krvna slika(KKS)</b></i></h1><br>
+   				<a style="margin-left:180px; width: 350px"  href="" class="btn testDugme crnoDugme" data-toggle="modal" data-target="#myModal">T E S T I R A J</a>
+   	
+  			</div>
+		</div>
+	</div>
+        
+        <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog  modal-sm">
+      <div class="modal-content">
+        <div class="modal-header sivoCrno">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><strong>Izaberite test slucaj:</strong></h4>
+        </div>
+        <div class="modal-body">
+         	 <input type="radio" name="test" ng-model="test" value="anemija"> Anemija<br>
+         	 <input type="radio" name="test" ng-model="test" value="sidero"> Sideropenijska/sideroblastna anemija<br>
+ <input type="radio" name="test" ng-model="test" value="bolest1"> Virus+Infekcija<br>
+         	 <input type="radio" name="test" ng-model="test" value="megaloblastna"> Megaloblastna anemija<br>
+         	 <input type="radio" name="test" ng-model="test" value="bakterije"> Bakterije<br>
+    
+         	 <input type="radio" name="test" ng-model="test" value="virusi">Virusi<br>
+         	 <input type="radio" name="test" ng-model="test" value="alergije"> Alergije<br>
+         	 <input type="radio" name="test" ng-model="test" value="leukemija"> Leukemija<br>
+         	 <input type="radio" name="test" ng-model="test" value="pancitopenija"> Pancitopenija<br>
+         	 <input type="radio" name="test" ng-model="test" value="bubrezi"> Bolesti bubrega
+         	 
+        </div>
+        <div class="modal-footer">
+          <a type="button" href="" class="btn crnoDugme" data-dismiss="modal" ng-click="popuni();">Nastavi</a>
+        </div>
+      </div>
+    </div>
+  </div>   
+   <div class="row"> 
+    <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-5 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel">
+            <div class="panel-heading sivoCrno">
+                <div class="panel-title"><strong>Unesite vrednosti:</strong></div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a class=crno id="signinlink" href="#/pocetna">Povratak na poèetnu</a></div>
+            </div>  
+            <div class="panel-body" >
+                
+                    <form  class="form-horizontal"  >
+                       
+                        <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4"> Eritrociti(RBC) </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="eritrociti"  type="number" ng-model="kks.eritrociti" />
+                           		<span class="input-group-addon ">10 <sup>12</sup>L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4"> Hemoglobin(HGB) </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="hemoglobin"  type="number" ng-model="kks.hemoglobin"/>
+                           		<span class="input-group-addon ">g/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4"> Hematokrit(HTC) </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="hematokrit"  type="number" ng-model="kks.hematokrit" />
+                            	<span class="input-group-addon ">%</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4"> Prosecni volumen eritrocita(MCV) </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja" name="mcv"  type="number" ng-model="kks.mcv"/>
+                            	<span class="input-group-addon ">fL</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4"> Prosecna kolicina hemoglobina na litar eritrocita(MCHC) </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja" name="mchc"  type="number" ng-model="kks.mchc"/>
+                            	<span class="input-group-addon ">g/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                        
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4"> Trombociti(PLT) </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="trombociti"  type="number" ng-model="kks.trombociti"/>
+                           		<span class="input-group-addon ">10<sup>9</sup>/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">Limfociti(LIM#) </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="limfociti"  type="number" ng-model="kks.lym"/>
+                            	<span class="input-group-addon ">%</span>
+                              </div>
+                            </div> 
+                        </div>
+                                     
+                        <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4"> Leukociti(WBC) </label>
+                            <div class="controls col-md-6 ">
+                            	<div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="leukociti"  type="number" ng-model="kks.leukociti" />
+                            	<span class="input-group-addon ">10<sup>9</sup>/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                                              
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">NEU </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="neu"  type="number" ng-model="kks.neu"/>
+                            	<span class="input-group-addon ">%</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">MON </label>
+                            <div class="controls col-md-6 ">
+                            	<div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="mon"  type="number" ng-model="kks.mon"/>
+                            	<span class="input-group-addon ">%</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">EOS </label>
+                            <div class="controls col-md-6 ">
+                            	<div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="eos"  type="number" ng-model="kks.eos"/>
+                            	<span class="input-group-addon ">%</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">BAS </label>
+                            <div class="controls col-md-6 ">
+                            	<div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="bas"  type="number" ng-model="kks.bas"/>
+                            	<span class="input-group-addon jedinica">%</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">UREA </label>
+                            <div class="controls col-md-6 ">
+                            	<div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="urea"  type="number" ng-model="kks.urea"/>
+                            	<span class="input-group-addon jedinica">mmol/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div id="div_id_location" class="form-group">
+                            <label for="id_location" class="control-label col-md-4">KREATININ </label>
+                            <div class="controls col-md-6 ">
+                            <div class="input-group">
+                                <input class="input-md textinput textInput form-control polja"  name="kreatinin"  type="number" ng-model="kks.kreatinin"/>
+                            	<span class="input-group-addon ">mmol/L</span>
+                              </div>
+                            </div> 
+                        </div>
+                        
+                         <div class="form-group"> 
+                            <div class="aab controls col-md-4 "></div>
+                            <div class="controls col-md-8">
+                               <input type="button" name="Signup" value="Završi" class="btn btn crnoDugme" id="button-id-signup" ng-click="kksFunc()" />
+                            </div>
+                        </div> 
+                            
+                    </form>
+
+              
+        </div>
+    </div> 
+</div>
+</div>	
+</div>
+</div>

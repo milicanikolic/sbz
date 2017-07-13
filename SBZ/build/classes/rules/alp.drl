@@ -1,0 +1,452 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.EnzimiJetre;
+import model.EnzimiJetreVrednosti;
+
+rule "Alp,nisko,0-2"
+agenda-group "jetra"
+    when
+    	$p: Pacijent(godine>0 && godine<=2) and
+        $ej: EnzimiJetre( alp < 25) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+end
+
+rule "Alp,visoko,0-2"
+agenda-group "jetra"
+    when
+    $p: Pacijent(godine>0 && godine<=2) and
+        $ej: EnzimiJetre( alp >500 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,normalno,0-2"
+agenda-group "jetra"
+    when
+     $p: Pacijent(godine>0 && godine<=2) and
+        $ej: EnzimiJetre( alp >= 25 && alp<=500 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+rule "Alp,nisko,3-7"
+agenda-group "jetra"
+    when
+    	$p: Pacijent(godine>=3 && godine<=7) and
+        $ej: EnzimiJetre( alp < 100) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+end
+
+rule "Alp,visoko,3-7"
+agenda-group "jetra"
+    when
+    $p: Pacijent(godine>=3 && godine<=7) and
+        $ej: EnzimiJetre( alp >400 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,normalno,3-7"
+agenda-group "jetra"
+    when
+     $p: Pacijent(godine>=3 && godine<=7) and
+        $ej: EnzimiJetre( alp >= 100 && alp<=400 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+rule "Alp,nisko,8-12"
+agenda-group "jetra"
+    when
+    	$p: Pacijent(godine>=8 && godine<=12) and
+        $ej: EnzimiJetre( alp < 179) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+end
+
+rule "Alp,visoko,8-12"
+agenda-group "jetra"
+    when
+    $p: Pacijent(godine>=8 && godine<=12) and
+        $ej: EnzimiJetre( alp >472 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,normalno,8-12"
+agenda-group "jetra"
+    when
+     $p: Pacijent(godine>=8 && godine<=12) and
+        $ej: EnzimiJetre( alp >= 179 && alp<=472 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+    then
+        $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+rule "Alp,musko,nisko,13-14"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=13 && godine<=14 && zensko==false) and
+        $ej: EnzimiJetre( alp < 228 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,musko,visoko,13-14"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=13 && godine<=14 && zensko==false) and
+        $ej: EnzimiJetre( alp > 650) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,musko,normalno,13-14"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=13 && godine<=14 && zensko==false) and
+        $ej: EnzimiJetre( alp >= 228 && alp<=650 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+rule "Alp,musko,nisko,15-16"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=15 && godine<=16 && zensko==false) and
+        $ej: EnzimiJetre( alp < 97 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,musko,visoko,15-16"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=15 && godine<=16 && zensko==false) and
+        $ej: EnzimiJetre( alp > 503 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,musko,normalno,15-16"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=15 && godine<=16 && zensko==false) and
+        $ej: EnzimiJetre( alp >= 97 && alp<=503 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+rule "Alp,musko,nisko,17-19"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=17 && godine<=19 && zensko==false) and
+        $ej: EnzimiJetre( alp < 67) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,musko,visoko,17-19"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=17 && godine<=19 && zensko==false) and
+        $ej: EnzimiJetre( alp > 264 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,musko,normalno,17-19"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=17 && godine<=19 && zensko==false) and
+        $ej: EnzimiJetre( alp >= 67 && alp<=264 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+rule "Alp,musko,nisko,>20"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=20 && zensko==false) and
+        $ej: EnzimiJetre( alp < 60) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,musko,visoko,>20"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=20 && zensko==false) and
+        $ej: EnzimiJetre( alp > 142 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,musko,normalno,>20"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=20 && zensko==false) and
+        $ej: EnzimiJetre( alp >= 60 && alp<=142 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+
+rule "Alp,zensko,nisko,13-14"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=13 && godine<=14 && zensko==true) and
+        $ej: EnzimiJetre( alp < 89) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,zensko,visoko,13-14"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=13 && godine<=14 && zensko==true) and
+        $ej: EnzimiJetre( alp > 435 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,zensko,normalno,13-14"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=13 && godine<=14 && zensko==true) and
+        $ej: EnzimiJetre( alp >= 89 && alp<=435 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+
+
+rule "Alp,zensko,nisko,15-16"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=15 && godine<=16 && zensko==true) and
+        $ej: EnzimiJetre( alp < 79) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,zensko,visoko,15-16"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=15 && godine<=16 && zensko==true) and
+        $ej: EnzimiJetre( alp > 193 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,zensko,normalno,15-16"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=15 && godine<=16 && zensko==true) and
+        $ej: EnzimiJetre( alp >= 79 && alp<=193 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+
+rule "Alp,zensko,nisko,17-19"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=17 && godine<=19 && zensko==true) and
+        $ej: EnzimiJetre( alp < 50) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,zensko,visoko,17-19"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=17 && godine<=19 && zensko==true) and
+        $ej: EnzimiJetre( alp > 125 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,zensko,normalno,17-19"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=17 && godine<=19 && zensko==true) and
+        $ej: EnzimiJetre( alp >= 50 && alp<=125 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+
+
+rule "Alp,zensko,nisko,20-50"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>=20 && godine<=50 && zensko==true) and
+        $ej: EnzimiJetre( alp < 54) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,zensko,visoko,20-50"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=20 && godine<=50 && zensko==true) and
+        $ej: EnzimiJetre( alp > 119 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,zensko,normalno,20-50"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=20 && godine<=50 && zensko==true) and
+        $ej: EnzimiJetre( alp >= 54 && alp<=119 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+
+
+
+rule "Alp,zensko,nisko,>50"
+agenda-group "jetra"
+when
+	$p: Pacijent(godine>50 && zensko==true) and
+        $ej: EnzimiJetre( alp < 64) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+		 $ejVrednost.setAlp(Kolicina.NISKO);
+        update($ejVrednost);
+
+end
+
+
+rule "Alp,zensko,visoko,>50"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>=50 && zensko==true) and
+        $ej: EnzimiJetre( alp > 153 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.VISOKO);
+        update($ejVrednost);
+end
+
+rule "Alp,zensko,normalno,>50"
+agenda-group "jetra"
+when
+$p: Pacijent(godine>50 && zensko==true) and
+        $ej: EnzimiJetre( alp >= 64 && alp<=153 ) and
+        $ejVrednost: EnzimiJetreVrednosti (alp==Kolicina.NA)
+then
+	 $ejVrednost.setAlp(Kolicina.NORMALNO);
+        update($ejVrednost);
+end
+
+

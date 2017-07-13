@@ -1,0 +1,62 @@
+<div class="container" ng-controller="pocetnaC" ng-init="uzmiBolesti()">
+&nbsp;
+<div class="row">
+	<div class="col-xs-10">
+	<div class="panel panel-default poluProvidanBeo">
+		
+    	<div class="panel-heading poluProvidanBeo" >
+    	<a style="margin-left: 10px;" class="btn crnoDugme" href="#izbor"> POCETNA</a>
+    	<a style="margin-left: 650px;" class="btn crnoDugme" href="#pocetna"> NOVI KORISNIK</a>
+    	<h1 align="center"><b><i>Vasi rezultati</i></b></h1> 
+        </div>
+    	
+    <div class="panel-body poluProvidanCrni">
+    	<h2 style="color: white;">Na osnovu obradjenih rezultata, postoje sumnje na sledece bolesti:</h2>
+    	<table class="table">
+    	<tr>
+    	<ul>
+  			<td><li style="color: white;" ng-repeat="bolest in bolesti"><strong>{{bolest}}</strong></li></td>
+  
+		</ul>
+		</tr>
+		</table>
+    </div>
+    <div class="panel-footer" style="padding-left: 37%;" >
+    	<a href="" class="btn btn-lg crnoDugme" data-toggle="modal" data-target="#myModal2">
+          <span class="glyphicon glyphicon-envelope"></span> Posalji rezultate na mail </a>
+    </div>
+  </div>
+</div> 
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog  modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Unesite vasu email adresu:</h4>
+        </div>
+        <div class="modal-body">
+         	 <input type="email" class="form-control" name="email" placeholder="Upisite email" ng-model="adresa"> 
+        
+        </div>
+        <div class="modal-footer">
+          <a type="button" href="" class="btn crnoDugme" data-dismiss="modal" ng-click="posaljiMejl()">Posalji</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="row" ng-hide="sakrij">
+<div class="col-xs-12">
+ <div class="alert alert-success" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Uspesno slanje! </strong>
+    Vasi rezulati su uspesno poslati.
+</div>
+</div>
+</div>
+
+</div>
+
+</div>

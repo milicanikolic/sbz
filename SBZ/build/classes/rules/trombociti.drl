@@ -1,0 +1,36 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+
+rule "trombociti,nisko"
+agenda-group "kks"
+    when
+        $kks: KKS( trombociti < 150 ) and
+        $kksVrednost: KKSVrednosti (trombociti==Kolicina.NA)
+    then
+        $kksVrednost.setTrombociti(Kolicina.NISKO);
+        update($kksVrednost);
+end
+
+rule "trombociti,visoko"
+agenda-group "kks"
+    when
+        $kks: KKS( trombociti > 450 ) and
+        $kksVrednost: KKSVrednosti (trombociti==Kolicina.NA)
+    then
+        $kksVrednost.setTrombociti(Kolicina.VISOKO);
+        update($kksVrednost);
+end
+
+rule "trombociti,normalno"
+agenda-group "kks"
+    when
+        $kks: KKS( trombociti >= 150 && trombociti<=450 ) and
+        $kksVrednost: KKSVrednosti (trombociti==Kolicina.NA)
+    then
+        $kksVrednost.setTrombociti(Kolicina.NORMALNO);
+        update($kksVrednost);
+end

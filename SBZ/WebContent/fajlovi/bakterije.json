@@ -1,0 +1,18 @@
+{
+	"bakterije":{
+			"eritrociti":5,
+			"hemoglobin":150,
+			"hematokrit":50,
+			"mcv":90,
+			"mchc":320,
+			"trombociti":200,
+			"lym":10,
+			"leukociti":5,
+			"neu":80,
+			"mon":2,
+			"eos":3,
+			"bas":0.1,
+			"urea":2,
+			"kreatinin":70
+			}
+}

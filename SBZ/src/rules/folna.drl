@@ -1,0 +1,38 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.DodatnoAnemija2;
+import model.DodatnoAnemija2Vrednosti;
+
+rule "folna,nisko"
+agenda-group "kks"
+    when
+        $da: DodatnoAnemija2( folnaKiselina < 5 ) and
+        $daVrednost: DodatnoAnemija2Vrednosti (folnaKiselina==Kolicina.NA)
+    then
+        $daVrednost.setFolnaKiselina(Kolicina.NISKO);
+        update($daVrednost);
+end
+
+rule "folna,visoko"
+agenda-group "kks"
+    when
+        $da: DodatnoAnemija2( folnaKiselina > 39.7 ) and
+        $daVrednost: DodatnoAnemija2Vrednosti (folnaKiselina==Kolicina.NA)
+    then
+        $daVrednost.setFolnaKiselina(Kolicina.VISOKO);
+        update($daVrednost);
+end
+
+rule "folna,normalno"
+agenda-group "kks"
+    when
+        $da: DodatnoAnemija2( folnaKiselina >= 5 && folnaKiselina<=39.7 ) and
+        $daVrednost: DodatnoAnemija2Vrednosti (folnaKiselina==Kolicina.NA)
+    then
+        $daVrednost.setFolnaKiselina(Kolicina.NORMALNO);
+        update($daVrednost);
+end

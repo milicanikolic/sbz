@@ -1,0 +1,18 @@
+{
+	"anemija":{
+			"eritrociti":4,
+			"hemoglobin":130,
+			"hematokrit":35,
+			"mcv":90,
+			"mchc":320,
+			"trombociti":200,
+			"lym":30,
+			"leukociti":5,
+			"neu":50,
+			"mon":2,
+			"eos":3,
+			"bas":0.5,
+			"urea":5,
+			"kreatinin":70
+			}
+}

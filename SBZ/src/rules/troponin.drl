@@ -1,0 +1,31 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import model.EnzimiUKrvi;
+import model.EnzimiUKrviVrednosti;
+
+rule "Troponin,normalno"
+agenda-group "enzimiKrvi"
+    when
+        $ek: EnzimiUKrvi( troponin < 0.3) and
+        $ekVrednost: EnzimiUKrviVrednosti (troponin==Kolicina.NA)
+    then
+        $ekVrednost.setTroponin(Kolicina.NORMALNO);
+        update($ekVrednost);
+end
+
+rule "Troponin,visoko"
+agenda-group "enzimiKrvi"
+    when
+        $ek: EnzimiUKrvi( troponin >=0.3 ) and
+        $ekVrednost: EnzimiUKrviVrednosti (troponin==Kolicina.NA)
+    then
+        $ekVrednost.setTroponin(Kolicina.VISOKO);
+        update($ekVrednost);
+end
+
+
+

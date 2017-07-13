@@ -1,0 +1,18 @@
+{
+	"bubrezi":{
+			"eritrociti":5,
+			"hemoglobin":140,
+			"hematokrit":40,
+			"mcv":100,
+			"mchc":310,
+			"trombociti":200,
+			"lym":40,
+			"leukociti":5,
+			"neu":40,
+			"mon":2,
+			"eos":3,
+			"bas":0.2,
+			"urea":10,
+			"kreatinin":110
+			}
+}

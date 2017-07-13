@@ -1,0 +1,31 @@
+package rules
+
+import model.Pacijent;
+import model.KKS;
+import model.KKSVrednosti;
+import enums.Kolicina;
+import enums.Bolesti;
+import enums.DodatneAnalize;
+import model.DodatnoAnemija1;
+import model.DodatnoAnemija1Vrednosti;
+import model.DodatnoAnemija2;
+import model.DodatnoAnemija2Vrednosti;
+
+rule "bubrezi"
+agenda-group "kks"
+no-loop
+    when
+    $p:Pacijent(bubrezi==false)
+	$kksVrednost: KKSVrednosti (urea==Kolicina.VISOKO && kreatinin==Kolicina.VISOKO)
+   
+    
+    then
+
+        $p.dodajBolest(Bolesti.BUBREZI);
+        $p.setBubrezi(true);
+        update($p);
+        
+        
+end
+
+
